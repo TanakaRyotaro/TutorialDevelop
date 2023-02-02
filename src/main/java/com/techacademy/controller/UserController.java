@@ -18,8 +18,11 @@ import com.techacademy.service.UserService;
 @Controller
 @RequestMapping("user")
 public class UserController {
-    @Autowired
-    private UserService service;
+    private final UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+    }
     /**一覧画面を表示*/
     @GetMapping("/list")
     public String getList(Model model) {
@@ -56,7 +59,11 @@ public class UserController {
     }
     /** User更新処理 */
     @PostMapping("/update/{id}")
-    public String postUser(User user) {
+    public String postUser(@Validated User user, BindingResult res,Model model) {
+        if(res.hasErrors()) {
+            //エラーあり
+            return getRegister(user);
+        }
         // User登録
         service.saveUser(user);
         //一覧画面にリダイレクト

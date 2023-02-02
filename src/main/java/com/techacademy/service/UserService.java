@@ -12,9 +12,11 @@ import com.techacademy.repository.UserRepository;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
+    public UserService(UserRepository repository) {
+        this.userRepository = repository;
+    }
     /** 全件を検索して返す */
     public List<User> getUserList() {
         //リポジトリのfindAllメソッドを呼び出す
