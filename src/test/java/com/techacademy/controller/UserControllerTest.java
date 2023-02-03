@@ -78,7 +78,12 @@ class UserControllerTest {
         //Modelからuserlistを取り出す
         List<User> userlist = (List<User>)result.getModelAndView().getModel().get("userlist");
         userlist.size();
-        assertEquals(((User) userlist).getId(),1);
-        assertEquals(((User) userlist).getName(), "キラメキ太郎");
+        //ここから変更内容２
+        //下記の項目の表記方法が分からない。
+        //件数が3件であること
+        //userlistから1件ずつ取り出し、idとnameを検証する
+
+        assertEquals((userlist).getId(),1);
+        assertEquals((userlist).getName(), "キラメキ太郎");
     }
 }
